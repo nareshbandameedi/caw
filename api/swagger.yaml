@@ -1,0 +1,151 @@
+---
+swagger: "2.0"
+info:
+  description: CAW Studio user management service.
+  version: "1.0.0"
+  title: "CAW Studios"
+basePath: "/api/v1"
+host: "localhost:3000"
+tags:
+- name: "User"
+  description: "Operations on user"
+- name: "Json Patch"
+  description: "Operations on json patch"
+- name: "Image"
+  description: "Operations on image resize"
+schemes:
+- "http"
+paths:
+  /user/login:
+    post:
+      tags:
+      - "User"
+      summary: User login
+      description: User login
+      operationId: "userLogin"
+      parameters:
+        - name: body
+          in: body
+          description: User Login
+          required: true
+          schema:
+              $ref: "#/definitions/Login"
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/LoginResponse"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/Error"
+    x-swagger-router-controller: "web_services"
+  /json_patch:
+    put:
+      tags:
+      - "Json Patch"
+      summary: Get json object
+      description: Get updated json object from json patch object
+      operationId: "getJson"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/JsonPatchRequest"
+        - in: header
+          name: x-token
+          description: Authentication token
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/JsonPatchResponse"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/Error"
+    x-swagger-router-controller: "web_services"
+  /image_resize:
+    put:
+      tags:
+      - "Image"
+      summary: Image resize
+      description: Image resize
+      operationId: "getImage"
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/ImageResize"
+        - in: header
+          name: x-token
+          description: Authentication token
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/ImageResizeResponse"
+        400:
+          description: "Invalid parameters"
+          schema:
+            $ref: "#/definitions/Error"
+    x-swagger-router-controller: "web_services"    
+definitions:
+  Login:
+    type: "object"
+    required:
+    - username
+    - password
+    properties:
+      username:
+        type: string
+        description: Username
+      password:
+        type: "string"
+        description: Password
+  LoginResponse:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+      token:
+        type: object
+  JsonPatchRequest:
+    type: "object"
+    properties:
+      json_obeject:
+        type: "object"
+      json_patch:
+        type: "array"
+        items:
+          type: "object"
+  ImageResize:
+    type: "object"
+    properties:
+      url:
+        type: "string"
+      height:
+        type: number
+      width:
+        type: number
+      strategy:
+        type: "string"
+        enum: ["auto", "portrait", "landscape", "fit", "crop"]
+  ImageResizeResponse:
+    type: "object"
+    properties:
+      url:
+        type: "string"   
+  JsonPatchResponse:
+    type: "object"
+  Error:
+    type: "object"
+externalDocs:
+  description: "Find out more about CawStudio"
+  url: "www.cawstudios.com"

@@ -1,0 +1,33 @@
+{
+  "name": "att-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "nareshb",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.4",
+    "body-parser": "^1.18.3",
+    "config": "^3.1.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "fast-json-patch": "^2.1.0",
+    "image-download": "^1.1.0",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "kraken": "^0.4.0",
+    "moment": "^2.24.0",
+    "path": "^0.12.7",
+    "swagger-tools": "^0.10.4",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
